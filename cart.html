@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue 基础</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 插值文本 -->
+    <h1>
+      插值文本：{{ title }}
+    </h1>
+    <p v-once>v-once(不会改变)：{{ title }}</p>
+    <p v-html="rawHtml"></p>
+    <p :id="dynamic">v-bind（动态属性）</p>
+    <p>模版表达式 例如：{{ 1+1 }}，它是全局变量白名单（可以访问Math,Date...），不能访问自己定义的全局变量</p>
+    <p v-if="true">v-if：</p>
+    <p>{{ reverseTitle }}</p>
+  </div>
+
+  <script src="./vue.js"></script>
+
+  <script>
+    // 1. 创建 vue 实例
+    const app = new Vue({
+      el: '#app',
+      data () {
+        return {
+          title: '购物车',
+          rawHtml: '<span style="color:red;">v-html（原始 html）</span>',
+          dynamic: 'hiid'
+        }
+      },
+      computed: {
+        reverseTitle: function () {
+          return this.title.split('').reverse().join('')
+        }
+      }
+    });
+
+    setTimeout(() => {
+      app.title = 'mua~, vue!'
+    }, 1000);
+
+  </script>
+</body>
+</html>
